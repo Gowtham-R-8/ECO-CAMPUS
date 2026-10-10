@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCampus AI — Predictive Campus Resource Optimization System</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- ======================================================== -->
+  <!-- 1. LANDING PAGE OVERLAY (Hero, Architecture & Demo)       -->
+  <!-- ======================================================== -->
+  <div id="landing-view">
+    <!-- Landing Top Navbar -->
+    <nav style="display:flex; justify-content:space-between; align-items:center; padding:20px 48px; border-bottom:1px solid var(--border-color); background:rgba(7,16,18,0.8); backdrop-filter:blur(16px); position:sticky; top:0; z-index:100;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <h2 style="font-size:1.25rem; font-weight:800; background:linear-gradient(90deg, #10b981, #6ee7b7); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">EcoCampus AI</h2>
+          <span style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; font-weight:600;">Predictive Resource Intelligence</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button class="btn btn-secondary" onclick="app.enterDashboard()">Quick Guest Preview</button>
+        <button class="btn btn-primary" onclick="app.enterDashboard()">Launch Dashboard →</button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header style="max-width:1100px; margin:60px auto 40px; padding:0 24px; text-align:center;">
+      <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); padding:6px 16px; border-radius:999px; margin-bottom:24px;">
+        <span class="pulse-dot"></span>
+        <span style="color:#10b981; font-size:0.82rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;">AI-Powered Autonomous Resource Decision Support</span>
+      </div>
+
+      <h1 style="font-size:3.2rem; font-weight:900; line-height:1.15; letter-spacing:-0.03em; margin-bottom:18px;">
+        Make Every Resource Count.<br>
+        <span style="background:linear-gradient(90deg, #10b981, #3b82f6, #a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+          Detect. Predict. Explain. Simulate. Optimize.
+        </span>
+      </h1>
+
+      <p style="font-size:1.15rem; color:#94a3b8; max-width:780px; margin:0 auto 32px; line-height:1.6;">
+        “From detecting wastage to predicting its impact and simulating the best corrective action.” An end-to-end explainable AI decision-support platform designed for modern university campuses.
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+        <button class="btn btn-primary" style="padding:12px 28px; font-size:1rem;" onclick="app.enterDashboard()">
+          🚀 Explore Live Dashboard
+        </button>
+        <button class="btn btn-purple" style="padding:12px 28px; font-size:1rem;" onclick="app.enterDashboard(); setTimeout(() => app.navigateTo('simulator'), 300);">
+          ⚡ Test What-If Decision Simulator
+        </button>
+      </div>
+    </header>
+
+    <!-- Complete 9-Stage AI Workflow Architecture -->
+    <section style="max-width:1160px; margin:40px auto 70px; padding:0 24px;">
+      <div style="text-align:center; margin-bottom:28px;">
+        <h2 style="font-size:1.8rem; font-weight:800; color:#f8fafc;">The Closed-Loop AI Decision Engine</h2>
+        <p style="font-size:0.9rem; color:#94a3b8;">How EcoCampus AI turns telemetry streams into verified sustainability impact</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(115px, 1fr)); gap:10px; text-align:center;">
+        <div class="card" style="padding:14px 10px;"><div style="font-size:1.3rem;">📡</div><b style="font-size:0.75rem; color:#10b981;">1. DATA INGESTION</b><p style="font-size:0.65rem; color:#64748b;">Meters & Weather</p></div>
+        <div class="card" style="padding:14px 10px;"><div style="font-size:1.3rem;">🔍</div><b style="font-size:0.75rem; color:#f59e0b;">2. ANOMALY DETECTION</b><p style="font-size:0.65rem; color:#64748b;">IsolationForest</p></div>
+        <div class="card" style="padding:14px 10px;"><div style="font-size:1.3rem;">📈</div><b style="font-size:0.75rem; color:#60a5fa;">3. PREDICTION</b><p style="font-size:0.65rem; color:#64748b;">RandomForest Regressor</p></div>
+        <div class="card" style="padding:14px 10px;"><div style="font-size:1.3rem;">🧠</div><b style="font-size:0.75rem; color:#c084fc;">4. EXPLAINABLE AI</b><p style="font-size:0.65rem; color:#64748b;">Factor Decomposition</p></div>
+        <div class="card" style="padding:14px 10px;"><div style="font-size:1.3rem;">💡</div><b style="font-size:0.75rem; color:#10b981;">5. RECOMMEND</b><p style="font-size:0.65rem; color:#64748b;">Actionable Interventions</p></div>
+        <div class="card" style="padding:14px 10px; border-color:#8b5cf6;"><div style="font-size:1.3rem;">⚙️</div><b style="font-size:0.75rem; color:#a78bfa;">6. WHAT-IF SIMULATE</b><p style="font-size:0.65rem; color:#64748b;">Pre-test Scenarios</p></div>
+        <div class="card" style="padding:14px 10px;"><div style="font-size:1.3rem;">🏆</div><b style="font-size:0.75rem; color:#3b82f6;">7. OPTIMIZE</b><p style="font-size:0.65rem; color:#64748b;">Select Best Action</p></div>
+        <div class="card" style="padding:14px 10px;"><div style="font-size:1.3rem;">🌿</div><b style="font-size:0.75rem; color:#10b981;">8. IMPACT METRICS</b><p style="font-size:0.65rem; color:#64748b;">GRIHA Index Score</p></div>
+      </div>
+    </section>
+
+    <!-- Key Core Modules Feature Grid -->
+    <section style="max-width:1160px; margin:0 auto 80px; padding:0 24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px;">
+      <div class="card" style="padding:24px;">
+        <div style="width:44px; height:44px; border-radius:10px; background:rgba(239,68,68,0.15); display:flex; align-items:center; justify-content:center; color:#ef4444; font-size:1.2rem; margin-bottom:16px;">🚨</div>
+        <h3 style="font-size:1.15rem; font-weight:800; color:#f8fafc; margin-bottom:8px;">1. Isolation Forest Anomaly Detection</h3>
+        <p style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">Multivariate anomaly classification identifying abnormal electricity spikes and nocturnal water leaks before catastrophic billing waste occurs.</p>
+      </div>
+
+      <div class="card" style="padding:24px;">
+        <div style="width:44px; height:44px; border-radius:10px; background:rgba(124,58,237,0.15); display:flex; align-items:center; justify-content:center; color:#c084fc; font-size:1.2rem; margin-bottom:16px;">🧠</div>
+        <h3 style="font-size:1.15rem; font-weight:800; color:#f8fafc; margin-bottom:8px;">2. Transparent Explainable AI (XAI)</h3>
+        <p style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">Never a black-box. Deconstructs each detection into explicit causal factors: Temperature load (42%), Occupancy surge (28%), Equipment runtime (18%).</p>
+      </div>
+
+      <div class="card" style="padding:24px;">
+        <div style="width:44px; height:44px; border-radius:10px; background:rgba(16,185,129,0.15); display:flex; align-items:center; justify-content:center; color:#10b981; font-size:1.2rem; margin-bottom:16px;">⚡</div>
+        <h3 style="font-size:1.15rem; font-weight:800; color:#f8fafc; margin-bottom:8px;">3. AI What-If Decision Simulator</h3>
+        <p style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">Test interventions prior to operational execution. Modify AC hours, thermostat setbacks, or lighting and see projected annual savings in ₹ Lakhs.</p>
+      </div>
+    </section>
+
+    <!-- Footer of Landing Page -->
+    <footer style="text-align:center; padding:30px; border-top:1px solid var(--border-color); color:var(--text-muted); font-size:0.82rem;">
+      EcoCampus AI — Academic & Institutional Predictive Resource Management Platform © 2026. Built with Python, Flask, Scikit-learn & MySQL.
+    </footer>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 2. MAIN APPLICATION WORKSPACE                             -->
+  <!-- ======================================================== -->
+  <div id="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a class="brand-badge" onclick="app.showLanding()">
+          <div class="brand-icon">⚡</div>
+          <div class="brand-text">
+            <h2>EcoCampus AI</h2>
+            <span>Predictive Suite</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Campus Intelligence</div>
+        <a class="nav-item active" data-view="dashboard">
+          <span>📊</span> Dashboard
+        </a>
+        <a class="nav-item" data-view="buildings">
+          <span>🏢</span> Buildings
+        </a>
+        <a class="nav-item" data-view="energy">
+          <span>⚡</span> Energy Monitoring
+        </a>
+        <a class="nav-item" data-view="water">
+          <span>💧</span> Water Monitoring
+        </a>
+
+        <div class="nav-section-title">AI Decision Engine</div>
+        <a class="nav-item" data-view="anomalies">
+          <span>🚨</span> Anomalies & XAI
+          <span class="badge" id="sidebar-anom-badge">3</span>
+        </a>
+        <a class="nav-item" data-view="predictions">
+          <span>🔮</span> Predictions
+        </a>
+        <a class="nav-item" data-view="recommendations">
+          <span>💡</span> AI Recommendations
+        </a>
+
+        <div class="nav-section-title">Simulation & Impact</div>
+        <a class="nav-item ai-pill" data-view="simulator">
+          <span>⚙️</span> What-If Simulator
+          <span class="badge" style="background:#7c3aed; color:white;">AI</span>
+        </a>
+        <a class="nav-item" data-view="sustainability">
+          <span>🌿</span> Sustainability Index
+        </a>
+
+        <div class="nav-section-title">Operations</div>
+        <a class="nav-item" data-view="alerts">
+          <span>🔔</span> Alerts System
+        </a>
+        <a class="nav-item" data-view="reports">
+          <span>📑</span> Reports & Audit
+        </a>
+        <a class="nav-item" data-view="data">
+          <span>📥</span> Data Management
+        </a>
+        <a class="nav-item" data-view="settings">
+          <span>⚙️</span> System Settings
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar" id="current-user-avatar">R</div>
+        <div class="user-info">
+          <div class="name" id="current-user-name">Dr. Rajesh Sharma</div>
+          <div class="role" id="current-user-role">Facility Director (Admin)</div>
+        </div>
+        <button class="icon-btn" onclick="app.showLanding()" title="Back to Overview" style="width:30px; height:30px;">
+          🏠
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+      
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="mobile-menu-btn">☰</button>
+          
+          <div class="topbar-select-group">
+            <!-- Campus Selector -->
+            <select class="select-pill" id="topbar-campus-select">
+              <option value="CAMPUS-1">🏫 EcoCampus Main Campus (Bangalore)</option>
+            </select>
+
+            <!-- Building Selector -->
+            <select class="select-pill" id="topbar-building-select">
+              <option value="ALL">🏢 All Buildings (Campus)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Live / Demo Mode Toggle -->
+          <div class="demo-toggle-wrap" title="Toggle Simulated vs Live IoT Hardware Feed">
+            <button class="demo-btn active" id="demo-mode-toggle">● DEMO DATA</button>
+          </div>
+
+          <!-- AI Decision Engine Status -->
+          <div class="ai-status-badge">
+            <span class="pulse-dot"></span>
+            <span>AI Decision Engine: Ready</span>
+          </div>
+
+          <!-- Live Anomaly Injector Button for Hackathon Demonstrations -->
+          <button class="btn btn-secondary btn-sm" onclick="app.injectDemoAnomaly()" title="Inject spike for live anomaly presentation">
+            ⚡ Inject Spike (Demo)
+          </button>
+
+          <!-- Notifications Bell -->
+          <button class="icon-btn" onclick="app.navigateTo('alerts')">
+            🔔
+            <span class="badge" id="alerts-count-badge" style="display:none;">0</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Scrollable Body -->
+      <main class="content-body">
+        
+        <!-- ============================================== -->
+        <!-- VIEW 1: DASHBOARD                              -->
+        <!-- ============================================== -->
+        <section id="view-dashboard" class="view-section active">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>Good Morning, Director</h1>
+              <p>Here’s your predictive campus resource intelligence and anomaly overview.</p>
+            </div>
+            <div class="header-actions">
+              <div class="time-tabs">
+                <button class="time-tab active" data-range="24h">24h</button>
+                <button class="time-tab" data-range="7d">7d</button>
+                <button class="time-tab" data-range="30d">30d</button>
+                <button class="time-tab" data-range="6m">6m</button>
+                <button class="time-tab" data-range="1y">1y</button>
+              </div>
+              <button class="btn btn-primary" onclick="app.navigateTo('simulator')">
+                ⚡ Run Simulator
+              </button>
+            </div>
+          </div>
+
+          <!-- 6 KPI Cards with Animated Numbers -->
+          <div class="kpi-grid">
+            <!-- 1. Electricity Usage -->
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-label">Electricity Usage</span>
+                <div class="kpi-icon-wrap" style="background:rgba(16,185,129,0.15); color:#10b981;">⚡</div>
+              </div>
+              <div class="kpi-value-wrap">
+                <span class="kpi-value" id="kpi-elec-val">1,248</span>
+                <span class="kpi-unit">kWh/day</span>
+              </div>
+              <div class="kpi-footer">
+                <span class="trend-badge trend-down-good">↓ 8.4%</span>
+                <span>vs previous cycle</span>
+              </div>
+            </div>
+
+            <!-- 2. Water Usage -->
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-label">Water Consumption</span>
+                <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.15); color:#60a5fa;">💧</div>
+              </div>
+              <div class="kpi-value-wrap">
+                <span class="kpi-value" id="kpi-water-val">18,420</span>
+                <span class="kpi-unit">L/day</span>
+              </div>
+              <div class="kpi-footer">
+                <span class="trend-badge trend-down-good">↓ 5.2%</span>
+                <span>vs historical norm</span>
+              </div>
+            </div>
+
+            <!-- 3. Active Anomalies -->
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-label">Active Anomalies</span>
+                <div class="kpi-icon-wrap" style="background:rgba(239,68,68,0.15); color:#ef4444;">🚨</div>
+              </div>
+              <div class="kpi-value-wrap">
+                <span class="kpi-value" id="kpi-anom-val" style="color:#ef4444;">3</span>
+                <span class="kpi-unit">Active</span>
+              </div>
+              <div class="kpi-footer">
+                <span style="color:#f87171; font-weight:700;">1 Critical</span>
+                <span>• Isolation Forest flagged</span>
+              </div>
+            </div>
+
+            <!-- 4. Predicted Waste -->
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-label">Predicted Waste</span>
+                <div class="kpi-icon-wrap" style="background:rgba(245,158,11,0.15); color:#f59e0b;">⚠️</div>
+              </div>
+              <div class="kpi-value-wrap">
+                <span class="kpi-value" id="kpi-waste-val">142</span>
+                <span class="kpi-unit">kWh</span>
+              </div>
+              <div class="kpi-footer">
+                <span style="color:#fbbf24;">Next 24 hours</span>
+                <span>forecasted loss</span>
+              </div>
+            </div>
+
+            <!-- 5. Estimated Cost -->
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-label">Estimated Utility Cost</span>
+                <div class="kpi-icon-wrap" style="background:rgba(124,58,237,0.15); color:#a78bfa;">₹</div>
+              </div>
+              <div class="kpi-value-wrap">
+                <span class="kpi-value" id="kpi-cost-val">₹8,420</span>
+                <span class="kpi-unit">/day</span>
+              </div>
+              <div class="kpi-footer">
+                <span style="color:#a78bfa;">Grid tariff</span>
+                <span>₹7.50 / kWh</span>
+              </div>
+            </div>
+
+            <!-- 6. Sustainability Score -->
+            <div class="kpi-card" style="border-color:rgba(16,185,129,0.3);">
+              <div class="kpi-top">
+                <span class="kpi-label">Sustainability Score</span>
+                <div class="kpi-icon-wrap" style="background:rgba(16,185,129,0.2); color:#10b981;">🌿</div>
+              </div>
+              <div class="kpi-value-wrap">
+                <span class="kpi-value" id="kpi-sus-val" style="color:#10b981;">85</span>
+                <span class="kpi-unit">/ 100</span>
+              </div>
+              <div class="kpi-footer">
+                <span class="trend-badge trend-down-good">Tier A+</span>
+                <span>GRIHA Campus Benchmark</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ======================================================== -->
+          <!-- DEDICATED ELECTRICITY LOSSES & FINANCIAL WASTAGE PANEL    -->
+          <!-- ======================================================== -->
+          <div class="card" style="border: 1px solid rgba(239, 68, 68, 0.4); background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(16, 27, 30, 0.95) 100%); margin-bottom: 24px;">
+            <div class="card-header" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:1.3rem;">🔥</span>
+                  <h3 class="card-title" style="color: #f87171; font-size:1.15rem; font-weight:800;">Campus Electricity Losses & Financial Wastage Intelligence</h3>
+                </div>
+                <span class="card-subtitle">Real-time breakdown of unutilized power bleed, thermal overcooling, off-hours wastage, and projected financial loss to the institution.</span>
+              </div>
+              <span class="badge badge-critical" style="font-size:0.8rem; padding:6px 12px;">ACTIVE ENERGY LEAKAGE</span>
+            </div>
+
+            <!-- 4 Core Financial Loss KPIs -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin: 18px 0;">
+              <div class="kpi-card" style="background: rgba(0,0,0,0.3); border-color: rgba(239, 68, 68, 0.3);">
+                <span class="kpi-label" style="color:#f87171;">Daily Energy Bleed</span>
+                <div class="kpi-value-wrap">
+                  <span class="kpi-value" id="loss-daily-kwh" style="color:#f87171;">142.0</span>
+                  <span class="kpi-unit">kWh/day</span>
+                </div>
+                <span style="font-size:0.75rem; color:#94a3b8;">~11.4% of total daily load</span>
+              </div>
+
+              <div class="kpi-card" style="background: rgba(0,0,0,0.3); border-color: rgba(239, 68, 68, 0.4);">
+                <span class="kpi-label" style="color:#f87171;">Daily Financial Loss</span>
+                <div class="kpi-value-wrap">
+                  <span class="kpi-value" id="loss-daily-inr" style="color:#ef4444;">₹1,065</span>
+                  <span class="kpi-unit">/day</span>
+                </div>
+                <span style="font-size:0.75rem; color:#fca5a5;">Direct utility billing waste</span>
+              </div>
+
+              <div class="kpi-card" style="background: rgba(0,0,0,0.3); border-color: rgba(245, 158, 11, 0.3);">
+                <span class="kpi-label" style="color:#f59e0b;">Monthly Financial Burn</span>
+                <div class="kpi-value-wrap">
+                  <span class="kpi-value" id="loss-monthly-inr" style="color:#f59e0b;">₹31,950</span>
+                  <span class="kpi-unit">/month</span>
+                </div>
+                <span style="font-size:0.75rem; color:#94a3b8;">Avoidable utility expenditure</span>
+              </div>
+
+              <div class="kpi-card" style="background: rgba(0,0,0,0.3); border-color: rgba(239, 68, 68, 0.5);">
+                <span class="kpi-label" style="color:#f87171;">Projected Annual Bleed</span>
+                <div class="kpi-value-wrap">
+                  <span class="kpi-value" id="loss-annual-inr" style="color:#f87171;">₹3.88 Lakhs</span>
+                  <span class="kpi-unit">/year</span>
+                </div>
+                <span style="font-size:0.75rem; color:#fca5a5;">Lost if no setback implemented</span>
+              </div>
+            </div>
+
+            <!-- Root-Cause Loss Category Breakdown -->
+            <div style="margin-bottom: 20px;">
+              <h4 style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em; color:#94a3b8; margin-bottom:10px;">Primary Causes of Electricity Wastage</h4>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:12px;" id="loss-categories-container">
+                <!-- Will be dynamically populated or fallback -->
+                <div class="factor-card" style="border-left: 3px solid #ef4444;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="factor-name">HVAC Overcooling & Setpoint Drift</span>
+                    <span class="factor-weight" style="color:#ef4444;">44%</span>
+                  </div>
+                  <div style="font-size:0.82rem; font-weight:700; color:#f8fafc; margin:4px 0;">62.5 kWh/day • ₹468.75/day loss</div>
+                  <p style="font-size:0.72rem; color:#94a3b8; margin:0;">Chillers & split ACs operating below 22°C during moderate ambient weather.</p>
+                </div>
+
+                <div class="factor-card" style="border-left: 3px solid #f97316;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="factor-name">Phantom & Parasitic Standby</span>
+                    <span class="factor-weight" style="color:#f97316;">26%</span>
+                  </div>
+                  <div style="font-size:0.82rem; font-weight:700; color:#f8fafc; margin:4px 0;">36.9 kWh/day • ₹276.75/day loss</div>
+                  <p style="font-size:0.72rem; color:#94a3b8; margin:0;">Idle laboratory computers, monitors, and projectors left continuously plugged in.</p>
+                </div>
+
+                <div class="factor-card" style="border-left: 3px solid #f59e0b;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="factor-name">Off-Hours Unattended Runtime</span>
+                    <span class="factor-weight" style="color:#f59e0b;">20%</span>
+                  </div>
+                  <div style="font-size:0.82rem; font-weight:700; color:#f8fafc; margin:4px 0;">28.4 kWh/day • ₹213.00/day loss</div>
+                  <p style="font-size:0.72rem; color:#94a3b8; margin:0;">Classrooms, labs, and seminar halls left illuminated after classes end.</p>
+                </div>
+
+                <div class="factor-card" style="border-left: 3px solid #60a5fa;">
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="factor-name">Feeder Impedance & Line Loss</span>
+                    <span class="factor-weight" style="color:#60a5fa;">10%</span>
+                  </div>
+                  <div style="font-size:0.82rem; font-weight:700; color:#f8fafc; margin:4px 0;">14.2 kWh/day • ₹106.50/day loss</div>
+                  <p style="font-size:0.72rem; color:#94a3b8; margin:0;">Substation transformer copper losses and phase imbalance across sub-panels.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Building Financial Loss Leaderboard Table -->
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <h4 style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em; color:#94a3b8;">Facility Electricity Loss Leaderboard (Highest Financial Drain)</h4>
+                <span style="font-size:0.75rem; color:#f87171;">Ranked by daily financial wastage (₹)</span>
+              </div>
+              <div style="overflow-x:auto;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.82rem; text-align:left;">
+                  <thead>
+                    <tr style="border-bottom:1px solid var(--border-color); color:var(--text-muted); background:rgba(0,0,0,0.2);">
+                      <th style="padding:10px;">Rank</th>
+                      <th style="padding:10px;">Campus Facility</th>
+                      <th style="padding:10px;">Total Load</th>
+                      <th style="padding:10px;">Wasted Energy</th>
+                      <th style="padding:10px;">Wastage %</th>
+                      <th style="padding:10px;">Daily Financial Loss</th>
+                      <th style="padding:10px;">Monthly Financial Loss</th>
+                      <th style="padding:10px;">Loss Severity</th>
+                      <th style="padding:10px; text-align:right;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="loss-leaderboard-tbody">
+                    <!-- Populated dynamically by app.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Campus Map Section -->
+          <div class="card campus-map-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">🗺️ Interactive Smart Campus Overview</h3>
+                <span class="card-subtitle">Real-time telemetry indicators across all 8 campus facilities. Click any building node to inspect detailed sensor curves.</span>
+              </div>
+              <div style="display:flex; gap:12px; font-size:0.75rem;">
+                <span style="display:flex; align-items:center; gap:5px;"><span style="width:8px; height:8px; border-radius:50%; background:#10b981;"></span> Normal</span>
+                <span style="display:flex; align-items:center; gap:5px;"><span style="width:8px; height:8px; border-radius:50%; background:#f59e0b;"></span> Warning</span>
+                <span style="display:flex; align-items:center; gap:5px;"><span style="width:8px; height:8px; border-radius:50%; background:#ef4444;"></span> Critical</span>
+              </div>
+            </div>
+            <div id="campus-map-interactive"></div>
+          </div>
+
+          <!-- Charts Row: Trend Line/Area & Resource Distribution Donut -->
+          <div class="charts-grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">📈 Resource Consumption Trend</h3>
+                  <span class="card-subtitle">Actual Monitored vs AI Predictive Forecast vs Sustainable Baseline</span>
+                </div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="dashboard-trend-chart"></canvas>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">🏢 Building Resource Distribution</h3>
+                  <span class="card-subtitle">Campus consumption proportion</span>
+                </div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="dashboard-dist-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Recommendations Quick Section -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">💡 Top Corrective AI Recommendations</h3>
+                <span class="card-subtitle">Highest ROI actions identified by the autonomous Decision Engine</span>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="app.navigateTo('recommendations')">View All Recommendations →</button>
+            </div>
+            <div id="dashboard-recs-container"></div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 2: BUILDINGS MANAGEMENT                   -->
+        <!-- ============================================== -->
+        <section id="view-buildings" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>Campus Building Facilities</h1>
+              <p>Real-time occupancy, thermal, electricity, and water telemetry per building.</p>
+            </div>
+          </div>
+          <div id="buildings-cards-grid" class="buildings-grid"></div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 3: ENERGY MONITORING                      -->
+        <!-- ============================================== -->
+        <section id="view-energy" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>⚡ Electrical Energy Intelligence</h1>
+              <p>Sub-metered energy loads, peak demand shaving, and parasitic off-hours waste.</p>
+            </div>
+            <div class="time-tabs">
+              <button class="time-tab active" data-range="24h">24h</button>
+              <button class="time-tab" data-range="7d">7d</button>
+              <button class="time-tab" data-range="30d">30d</button>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Current Active Load</div><div class="kpi-value" id="energy-current-load">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Peak Demand Load</div><div class="kpi-value" id="energy-peak-load">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Average Base Load</div><div class="kpi-value" id="energy-avg-load">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Parasitic Energy Waste</div><div class="kpi-value" id="energy-waste-val" style="color:#f59e0b;">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Billed Tariff Amount</div><div class="kpi-value" id="energy-cost-val" style="color:#a78bfa;">--</div></div>
+            <div class="kpi-card" style="border-color:rgba(239,68,68,0.35);"><div class="kpi-label" style="color:#f87171;">Daily Financial Loss</div><div class="kpi-value" id="energy-daily-loss-val" style="color:#ef4444;">--</div></div>
+            <div class="kpi-card" style="border-color:rgba(245,158,11,0.35);"><div class="kpi-label" style="color:#f59e0b;">Monthly Loss Burn</div><div class="kpi-value" id="energy-monthly-loss-val" style="color:#f59e0b;">--</div></div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Hourly Electricity Demand Curve</h3>
+                <span class="card-subtitle">Actual monitored consumption vs AI predicted demand vs green baseline</span>
+              </div>
+            </div>
+            <div class="chart-wrapper" style="height:340px;">
+              <canvas id="energy-main-chart"></canvas>
+            </div>
+          </div>
+
+          <!-- Active Electricity Loss & Bleed Curve -->
+          <div class="card" style="border: 1px solid rgba(239, 68, 68, 0.35); background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(16, 27, 30, 0.95) 100%);">
+            <div class="card-header">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:1.2rem;">🔥</span>
+                  <h3 class="card-title" style="color:#f87171;">Hourly Electricity Loss & Wastage Bleed Curve</h3>
+                </div>
+                <span class="card-subtitle">Real-time delta (Actual minus Optimal Baseline) highlighting thermal overcooling peaks and off-hours parasitic losses</span>
+              </div>
+              <span class="badge badge-critical">AVOIDABLE POWER LOSS</span>
+            </div>
+            <div class="chart-wrapper" style="height:320px;">
+              <canvas id="energy-loss-chart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 4: WATER MONITORING                       -->
+        <!-- ============================================== -->
+        <section id="view-water" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>💧 Water Resource Monitoring & Leak Risk</h1>
+              <p>Volumetric flow rates, supply pressure tracking, and nocturnal leak detection.</p>
+            </div>
+          </div>
+
+          <!-- Leak Warning Card -->
+          <div class="card" style="border-left:5px solid #ef4444; background:rgba(239,68,68,0.06); margin-bottom:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <span class="badge-status badge-critical">Possible Water Leakage</span>
+                <h3 style="font-size:1.1rem; font-weight:800; color:#f8fafc; margin-top:4px;">Academic Block B: Water consumption is 34% higher than baseline</h3>
+                <p style="font-size:0.85rem; color:#cbd5e1; margin-top:4px;">Persistent laminar flow of 71 L/min observed during off-hours with localized -0.8 bar pressure drop across 2nd floor riser.</p>
+              </div>
+              <button class="btn btn-purple" onclick="app.navigateTo('simulator', { buildingId: 'BLK-B' })">Simulate Leak Repair Impact</button>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Daily Water Consumption</div><div class="kpi-value" id="water-daily-val">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Peak Hourly Usage</div><div class="kpi-value" id="water-peak-val">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Current Flow Rate</div><div class="kpi-value" id="water-flow-rate">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Campus Leakage Risk</div><div class="kpi-value" id="water-risk-level" style="color:#f59e0b;">MODERATE</div></div>
+          </div>
+
+          <div class="card">
+            <div class="chart-wrapper" style="height:350px;">
+              <canvas id="water-main-chart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 5: ANOMALIES & EXPLAINABLE AI             -->
+        <!-- ============================================== -->
+        <section id="view-anomalies" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>🚨 AI Anomaly Detection & Explainability</h1>
+              <p>Isolation Forest multivariate anomaly detection paired with transparent feature attribution.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary" onclick="app.triggerAnomalyScan()">
+                🔍 Run Campus Anomaly Scan
+              </button>
+            </div>
+          </div>
+
+          <div id="anomalies-timeline-container"></div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 6: CONSUMPTION PREDICTIONS               -->
+        <!-- ============================================== -->
+        <section id="view-predictions" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>🔮 AI Consumption Forecasting</h1>
+              <p>Random Forest regression models predicting next 24-hour and 7-day demand loads.</p>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Next 24h Predicted Load</div><div class="kpi-value" id="pred-total-val">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Expected Avoidable Waste</div><div class="kpi-value" id="pred-waste-val" style="color:#f59e0b;">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Forecast Confidence</div><div class="kpi-value" id="pred-conf-val" style="color:#10b981;">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Projected Billed Cost</div><div class="kpi-value" id="pred-cost-val" style="color:#a78bfa;">--</div></div>
+          </div>
+
+          <div class="card">
+            <div class="chart-wrapper" style="height:360px;">
+              <canvas id="predictions-main-chart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 7: AI RECOMMENDATIONS                     -->
+        <!-- ============================================== -->
+        <section id="view-recommendations" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>💡 Actionable AI Recommendations</h1>
+              <p>Decision-support actions to eliminate waste and optimize operational setpoints.</p>
+            </div>
+            <button class="btn btn-primary" onclick="app.loadRecommendationsView()">Refresh Recommendations</button>
+          </div>
+
+          <div id="recommendations-list-container"></div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 8: WHAT-IF DECISION SIMULATOR             -->
+        <!-- ============================================== -->
+        <section id="view-simulator" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>⚙️ AI What-If Decision Simulator</h1>
+              <p>Simulate the exact energy, cost, and carbon consequences of corrective interventions before executing them.</p>
+            </div>
+          </div>
+
+          <div class="simulator-layout">
+            <!-- Simulator Control Panel Form -->
+            <div class="card">
+              <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:16px;">Simulation Variables</h3>
+              
+              <div class="form-group">
+                <label>Target Campus Building</label>
+                <select class="form-control" id="sim-building-select" onchange="app.runSimulation(); app.runScenarioComparison();"></select>
+              </div>
+
+              <div class="form-group">
+                <label>Intervention Action</label>
+                <select class="form-control" id="sim-action-select" onchange="app.runSimulation(); app.runScenarioComparison();">
+                  <option value="weather_fluctuation">🌡️ Ambient Weather Fluctuation (Inspect Temperature Rise / Drop)</option>
+                  <option value="reduce_ac_1h">Reduce AC Operation by 1 hour/day</option>
+                  <option value="reduce_ac_2h">Reduce AC Operation by 2 hours/day</option>
+                  <option value="adjust_thermostat">Increase Cooling Setpoint (+2.0°C)</option>
+                  <option value="overcooling_drift">❄️ Severe Overcooling Drift (AC dialed down to 18°C - High Wastage)</option>
+                  <option value="optimize_lighting">Smart Motion-Zoned Lighting & Daylight Harvesting</option>
+                  <option value="fix_water_leak">Repair Washroom Main Valve & Flush Leak</option>
+                  <option value="solar_pv_integration">Integrate 50 kW Rooftop Solar PV</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Duration / Scope (Hours/Day)</label>
+                <div class="slider-group">
+                  <input type="range" id="sim-duration-slider" min="0.5" max="12" step="0.5" value="1.0" oninput="document.getElementById('sim-duration-val').innerText = this.value + ' hrs'; app.runSimulation();">
+                  <span class="slider-val-badge" id="sim-duration-val">1.0 hrs</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Ambient Outdoor Temperature (°C)</label>
+                <input type="number" class="form-control" id="sim-temp-input" value="32.0" step="0.5" oninput="app.runSimulation(); app.runScenarioComparison();">
+              </div>
+
+              <button class="btn btn-purple" style="width:100%; padding:12px; font-size:0.95rem; margin-top:10px;" onclick="app.runSimulation()">
+                ⚡ RUN SIMULATION
+              </button>
+            </div>
+
+            <!-- Simulation Results & Charts -->
+            <div>
+              <!-- Dynamic Thermal vs Action Balance Diagnostic Banner -->
+              <div id="sim-thermal-banner" style="display:block; border: 1px solid rgba(124,58,237,0.45); background: linear-gradient(135deg, rgba(25,18,45,0.9) 0%, rgba(15,23,42,0.98) 100%); border-radius: 12px; padding: 18px 22px; margin-bottom: 20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+                  <div style="max-width:550px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <span id="sim-thermal-icon" style="font-size:1.3rem;">⚖️</span>
+                      <span id="sim-thermal-severity-badge" class="badge" style="background:#7c3aed; color:#ffffff; font-size:0.75rem; font-weight:800;">DUAL PROFIT & LOSS AUDIT</span>
+                      <h4 id="sim-thermal-title" style="color:#f8fafc; font-size:1.05rem; font-weight:800; margin:0;">Both Utility Loss and Conservation Profit Evaluated</h4>
+                    </div>
+                    <p id="sim-thermal-desc" style="color:#cbd5e1; font-size:0.83rem; margin:6px 0 0 0; line-height:1.45;">
+                      Real-time thermodynamic intelligence evaluating outdoor weather impact, operational power losses, and financial savings.
+                    </p>
+                  </div>
+                  <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+                    <div id="sim-thermal-loss-box" style="background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.4); border-radius:8px; padding:8px 14px; text-align:center;">
+                      <div id="sim-thermal-loss-box-lbl" style="font-size:0.7rem; color:#fca5a5; text-transform:uppercase; font-weight:700;">Utility Loss / Heat Penalty</div>
+                      <div style="font-size:1.25rem; font-weight:900; color:#ef4444;" id="sim-heat-loss-inr-banner">-₹0/day</div>
+                    </div>
+                    <div id="sim-thermal-profit-box" style="background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); border-radius:8px; padding:8px 14px; text-align:center;">
+                      <div id="sim-thermal-profit-box-lbl" style="font-size:0.7rem; color:#86efac; text-transform:uppercase; font-weight:700;">Conservation Profit / Savings</div>
+                      <div style="font-size:1.25rem; font-weight:900; color:#10b981;" id="sim-action-save-inr-banner">+₹0/day</div>
+                    </div>
+                    <div style="background:rgba(124,58,237,0.15); border:1px solid rgba(124,58,237,0.4); border-radius:8px; padding:8px 14px; text-align:center;">
+                      <div style="font-size:0.7rem; color:#d8b4fe; text-transform:uppercase; font-weight:700;">Net Bottom Line</div>
+                      <div style="font-size:1.25rem; font-weight:900;" id="sim-net-balance-banner">₹0/day</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Simulator Dual-Sided 10-Point Comprehensive KPI Grid (Both Loss & Profit Visible) -->
+              <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-bottom:18px;">
+                <!-- 1. PROFIT / CONSERVATION SAVINGS (GREEN SECTION) -->
+                <div class="kpi-card" style="border-color:rgba(16,185,129,0.45); background:rgba(16,185,129,0.05);">
+                  <div class="kpi-label" style="color:#10b981; font-weight:700;">🟢 Action Daily Profit</div>
+                  <div class="kpi-value" id="sim-action-cost-val" style="color:#10b981;">--</div>
+                  <div style="font-size:0.75rem; color:#6ee7b7; margin-top:2px;" id="sim-action-kwh-val">--</div>
+                </div>
+
+                <div class="kpi-card" style="border-color:rgba(16,185,129,0.45); background:rgba(16,185,129,0.05);">
+                  <div class="kpi-label" style="color:#10b981; font-weight:700;">🟢 Weather Cooling Profit</div>
+                  <div class="kpi-value" id="sim-weather-profit-val" style="color:#10b981;">--</div>
+                  <div style="font-size:0.75rem; color:#6ee7b7; margin-top:2px;" id="sim-weather-kwh-val">--</div>
+                </div>
+
+                <div class="kpi-card" id="sim-action-annual-card" style="border-color:rgba(16,185,129,0.45); background:rgba(16,185,129,0.05);">
+                  <div class="kpi-label" id="sim-action-annual-lbl" style="color:#10b981; font-weight:700;">🟢 Net Annual Savings</div>
+                  <div class="kpi-value" id="sim-action-annual-val" style="color:#10b981;">--</div>
+                  <div style="font-size:0.75rem; color:#6ee7b7; margin-top:2px;" id="sim-total-saved-kwh-val">Combined Savings</div>
+                </div>
+
+                <!-- 2. LOSS / UTILITY EXPENDITURE (RED SECTION) -->
+                <div class="kpi-card" id="sim-thermal-loss-card" style="border-color:rgba(239,68,68,0.45); background:rgba(239,68,68,0.05);">
+                  <div class="kpi-label" id="sim-thermal-loss-lbl" style="color:#f87171; font-weight:700;">🔴 Temperature Heat Loss</div>
+                  <div class="kpi-value" id="sim-thermal-loss-val" style="color:#ef4444;">--</div>
+                  <div style="font-size:0.75rem; color:#fca5a5; margin-top:2px;" id="sim-thermal-kwh-val">--</div>
+                </div>
+
+                <div class="kpi-card" style="border-color:rgba(239,68,68,0.45); background:rgba(239,68,68,0.05);">
+                  <div class="kpi-label" style="color:#f87171; font-weight:700;">🔴 Daily Power Loss & Bill</div>
+                  <div class="kpi-value" id="sim-consumption-loss-val" style="color:#ef4444;">--</div>
+                  <div style="font-size:0.75rem; color:#fca5a5; margin-top:2px;" id="sim-simulated-kwh-val">--</div>
+                </div>
+
+                <div class="kpi-card" style="border-color:rgba(239,68,68,0.45); background:rgba(239,68,68,0.05);">
+                  <div class="kpi-label" style="color:#f87171; font-weight:700;">🔴 Annual Utility Expense</div>
+                  <div class="kpi-value" id="sim-annual-loss-val" style="color:#ef4444;">--</div>
+                  <div style="font-size:0.75rem; color:#fca5a5; margin-top:2px;">Facility Power Burden</div>
+                </div>
+
+                <!-- 3. NET BOTTOM LINE & SYSTEM HEALTH -->
+                <div class="kpi-card">
+                  <div class="kpi-label" id="sim-cost-saved-label">⚖️ Net Daily Outcome</div>
+                  <div class="kpi-value" id="sim-cost-saved-val">--</div>
+                  <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Profit vs Loss Balance</div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-label" id="sim-annual-label">⚖️ Net Annual Outcome</div>
+                  <div class="kpi-value" id="sim-annual-val">--</div>
+                  <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Annual Net Bottom Line</div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-label">Chiller COP Efficiency</div>
+                  <div class="kpi-value" id="sim-cop-val" style="color:#60a5fa;">--</div>
+                  <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Thermodynamic COP</div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-label">Sustainability Impact</div>
+                  <div class="kpi-value" id="sim-sus-impact-val" style="color:#a78bfa;">--</div>
+                  <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">CSI Green Points</div>
+                </div>
+              </div>
+
+              <!-- BEFORE vs AFTER Chart -->
+              <div class="card" style="margin-bottom:20px;">
+                <div class="card-header">
+                  <h3 class="card-title">Visual Comparison: BEFORE vs AFTER Intervention</h3>
+                </div>
+                <div class="chart-wrapper">
+                  <canvas id="simulator-comparison-chart"></canvas>
+                </div>
+              </div>
+
+              <!-- Multi-Scenario Comparison Matrix -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Multi-Scenario Evaluation (Scenario A vs B vs C)</h3>
+                </div>
+                <div id="best-scenario-highlight-box" style="margin-bottom:16px;"></div>
+                <div class="chart-wrapper" style="height:220px;">
+                  <canvas id="scenario-bar-chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 9: SUSTAINABILITY DASHBOARD               -->
+        <!-- ============================================== -->
+        <section id="view-sustainability" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>🌿 Campus Sustainability Index</h1>
+              <p>Transparent multi-factor sustainability benchmark aligned with GRIHA Green Campus standards.</p>
+            </div>
+          </div>
+
+          <div class="card" style="text-align:center; padding:36px; margin-bottom:24px; background:radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, rgba(16,27,30,0.85) 100%);">
+            <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:#10b981; font-weight:700;">Overall Campus Sustainability Score</span>
+            <div style="font-size:4.5rem; font-weight:900; color:#10b981; line-height:1; margin:14px 0;" id="sus-score-big">85/100</div>
+            <div id="sus-rating-tier" style="font-size:1.15rem; font-weight:700; color:#f8fafc;">Tier: Excellent (Grade A+)</div>
+          </div>
+
+          <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:14px;">Weighted Score Components</h3>
+          <div id="sus-components-container"></div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 10: REPORTS GENERATION                   -->
+        <!-- ============================================== -->
+        <section id="view-reports" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>📑 Audit Reports & Export</h1>
+              <p>Generate certified sustainability reports and export telemetry logs as PDF or CSV.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-primary" onclick="app.triggerGenerateReport('AI Impact Report', 'PDF')">
+                📥 Generate PDF Report
+              </button>
+              <button class="btn btn-secondary" onclick="app.triggerGenerateReport('Monthly Resource Report', 'CSV')">
+                Export CSV Data
+              </button>
+            </div>
+          </div>
+
+          <!-- Impact Summary Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-label">Total Energy Saved</div><div class="kpi-value" id="rep-energy-saved">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Total Water Conserved</div><div class="kpi-value" id="rep-water-saved">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Cost Savings Avoided</div><div class="kpi-value" id="rep-cost-saved">--</div></div>
+            <div class="kpi-card"><div class="kpi-label">Scope-2 CO₂ Abated</div><div class="kpi-value" id="rep-co2-saved">--</div></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Generated Facility Reports Archive</h3></div>
+            <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:left;">
+              <thead>
+                <tr style="border-bottom:1px solid var(--border-color); color:var(--text-muted);">
+                  <th style="padding:10px;">Report Title</th>
+                  <th style="padding:10px;">Period</th>
+                  <th style="padding:10px;">Author</th>
+                  <th style="padding:10px;">Created</th>
+                  <th style="padding:10px;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="reports-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 11: DATA MANAGEMENT                       -->
+        <!-- ============================================== -->
+        <section id="view-data" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>📥 Telemetry Data Management</h1>
+              <p>Ingest, clean, and validate 6-factor campus sensor data for AI models.</p>
+            </div>
+            <a href="/api/data/sample" class="btn btn-secondary" download>
+              📄 Download Sample CSV Template
+            </a>
+          </div>
+
+          <!-- 6 Presentation Input Categories Grid -->
+          <div id="data-stats-grid" class="kpi-grid"></div>
+
+          <!-- Drag and Drop CSV Zone -->
+          <div class="card" style="text-align:center; padding:40px 20px; border:2px dashed var(--border-color); cursor:pointer;" id="csv-dropzone">
+            <div style="font-size:2.5rem; margin-bottom:12px;">📊</div>
+            <h3 style="font-size:1.15rem; font-weight:700; color:#f8fafc; margin-bottom:6px;">Drag & Drop Campus Telemetry CSV</h3>
+            <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:16px;">
+              Required columns: timestamp, building_id, electricity_kwh, water_liters, occupancy, temperature, humidity
+            </p>
+            <input type="file" id="csv-file-input" accept=".csv" style="display:none;">
+            <button class="btn btn-primary" onclick="document.getElementById('csv-file-input').click()">
+              Browse CSV File
+            </button>
+          </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 12: ALERTS & NOTIFICATIONS                -->
+        <!-- ============================================== -->
+        <section id="view-alerts" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>🔔 Real-Time Alerts Center</h1>
+              <p>Live threshold deviations and automated warning broadcasts.</p>
+            </div>
+            <button class="btn btn-secondary" onclick="window.api.markAllAlertsRead().then(() => app.loadAlertsView())">
+              Mark All as Read
+            </button>
+          </div>
+          <div id="alerts-full-list"></div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- VIEW 13: SETTINGS                              -->
+        <!-- ============================================== -->
+        <section id="view-settings" class="view-section">
+          <div class="view-header">
+            <div class="view-header-title">
+              <h1>⚙️ Platform Configuration</h1>
+              <p>Campus parameters, machine learning hyperparameters, and database settings.</p>
+            </div>
+          </div>
+          <div class="card" style="max-width:680px;">
+            <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:16px;">System Parameters</h3>
+            <div class="form-group">
+              <label>Database Backend</label>
+              <input type="text" class="form-control" value="MySQL 8.0 / MariaDB (ecocampus_ai)" disabled>
+            </div>
+            <div class="form-group">
+              <label>Electricity Unit Tariff (INR)</label>
+              <input type="text" class="form-control" value="₹7.50 / kWh" disabled>
+            </div>
+            <div class="form-group">
+              <label>Water Unit Tariff (INR)</label>
+              <input type="text" class="form-control" value="₹25.00 / 1,000 Liters" disabled>
+            </div>
+            <div class="form-group">
+              <label>Scope-2 Grid Emission Factor</label>
+              <input type="text" class="form-control" value="0.82 kg CO2 / kWh" disabled>
+            </div>
+            <div class="form-group">
+              <label>Machine Learning Engine</label>
+              <input type="text" class="form-control" value="Isolation Forest & Random Forest Regressor (Scikit-learn)" disabled>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 3. ECOAI ASSISTANT CHATBOT (Floating Widget)             -->
+  <!-- ======================================================== -->
+  <div class="chatbot-trigger" id="chatbot-toggle-btn" title="Chat with EcoAI Assistant">
+    🤖
+  </div>
+
+  <div class="chatbot-window" id="chatbot-window">
+    <div class="chat-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:1.2rem;">🤖</span>
+        <div>
+          <h4 style="font-size:0.95rem; font-weight:800; color:#f8fafc;">EcoAI Assistant</h4>
+          <span style="font-size:0.68rem; color:#a78bfa;">Powered by live campus telemetry</span>
+        </div>
+      </div>
+      <button class="icon-btn" id="chat-close-btn" style="width:28px; height:28px;">✕</button>
+    </div>
+
+    <div class="chat-body" id="chat-messages-container">
+      <div class="chat-msg bot">
+        Hello! I am <b>EcoAI Assistant</b>. Ask me anything about campus electricity wastage, active water leaks, what-if savings, or sustainability metrics!
+      </div>
+    </div>
+
+    <div class="chat-chips">
+      <button class="chat-chip">Which building wastes the most electricity?</button>
+      <button class="chat-chip">What caused today's anomaly in Block A?</button>
+      <button class="chat-chip">How much can we save by reducing AC usage?</button>
+      <button class="chat-chip">What is our current sustainability score?</button>
+    </div>
+
+    <form class="chat-footer" id="chat-form">
+      <input type="text" class="form-control" id="chat-input" placeholder="Ask EcoAI Assistant..." autocomplete="off">
+      <button type="submit" class="btn btn-purple btn-sm">Send</button>
+    </form>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 4. MODALS & TOAST NOTIFICATION CONTAINER                 -->
+  <!-- ======================================================== -->
+  <!-- Building Detail Modal -->
+  <div class="modal-overlay" id="building-detail-modal">
+    <div class="modal-card" style="max-width:680px;" id="building-modal-content"></div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
